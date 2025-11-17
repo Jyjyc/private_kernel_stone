@@ -97,7 +97,7 @@ jobs:
         patch -p1 -F5 < $KERNEL_ROOT/custom.patch
         cd $KERNEL_ROOT/KernelSU
         echo "Apply TWA_RESUME patch"
-        #patch -p1 -F5 < twa_resume.patch
+        patch -p1 -F5 < twa_resume.patch
 
     - name: Configure env
       run: |
