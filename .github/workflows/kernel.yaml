@@ -42,7 +42,7 @@ jobs:
         python3-markdown libxml2-utils xsltproc libc6-dev libtinfo6 cpio kmod \
         openssl libelf-dev pahole libarchive-tools rsync ssh git-core \
         x11proto-core-dev unzip \
-        lld clang-tools llvm-dev bolt libpolly-dev \
+        lld clang-tools llvm-dev \
         --fix-missing
 
     - name: Configure ccache
