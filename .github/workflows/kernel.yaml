@@ -42,7 +42,7 @@ jobs:
         python3-markdown libxml2-utils xsltproc libc6-dev libtinfo6 cpio kmod \
         openssl libelf-dev pahole libarchive-tools rsync ssh git-core \
         x11proto-core-dev unzip \
-        lld-20 clang-tools-20 llvm-20-dev bolt-20 libpolly-20-dev \
+        lld clang-tools llvm-dev bolt libpolly-dev \
         --fix-missing
 
     - name: Configure ccache
@@ -106,27 +106,27 @@ jobs:
         echo "SUBARCH=arm64" >> $GITHUB_ENV
         echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
-        echo "CC=ccache clang-20" >> $GITHUB_ENV
-        echo "CXX=ccache clang++-20" >> $GITHUB_ENV
-        echo "AR=llvm-ar-20" >> $GITHUB_ENV
-        echo "NM=llvm-nm-20" >> $GITHUB_ENV
-        echo "LD=ld.lld-20" >> $GITHUB_ENV
-        echo "STRIP=llvm-strip-20" >> $GITHUB_ENV
-        echo "OBJCOPY=llvm-objcopy-20" >> $GITHUB_ENV
-        echo "OBJDUMP=llvm-objdump-20" >> $GITHUB_ENV
-        echo "READELF=llvm-readelf-20" >> $GITHUB_ENV
-        echo "HOSTCC=ccache clang-20" >> $GITHUB_ENV
-        echo "HOSTCXX=ccache clang++-20" >> $GITHUB_ENV
+        echo "CC=ccache clang" >> $GITHUB_ENV
+        echo "CXX=ccache clang++" >> $GITHUB_ENV
+        echo "AR=llvm-ar" >> $GITHUB_ENV
+        echo "NM=llvm-nm" >> $GITHUB_ENV
+        echo "LD=ld.lld" >> $GITHUB_ENV
+        echo "STRIP=llvm-strip" >> $GITHUB_ENV
+        echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
+        echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
+        echo "READELF=llvm-readelf" >> $GITHUB_ENV
+        echo "HOSTCC=ccache clang" >> $GITHUB_ENV
+        echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
         echo "CFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
         echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
-        echo "LDFLAGS=\"-flto=thin -fuse-ld=lld-20\"" >> $GITHUB_ENV
+        echo "LDFLAGS=\"-flto=thin -fuse-ld=lld\"" >> $GITHUB_ENV
         echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
         echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
-        echo "LLVM_USE_LINKER=lld-20" >> $GITHUB_ENV
+        echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
 
     - name: Defconfig
       run: |
