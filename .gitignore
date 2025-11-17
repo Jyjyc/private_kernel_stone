@@ -35,7 +35,7 @@
 *.ns_deps
 *.o
 *.o.*
-*.patch
+#*.patch
 *.s
 *.so
 *.so.dbg
@@ -153,3 +153,17 @@ arch/arm/boot/dts/vendor
 #Ignoring Android.bp link file
 #
 Android.bp
+
+################################
+# Jyjyc's customizations
+################################
+
+#Workaround for Windows filesystem restrictions
+#**/aux.[ch]
+#**/con.[ch]
+
+#Notepad++ backups
+**/nppBackup/**
+
+#Zone identifier
+*:Zone.Identifier
