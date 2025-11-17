@@ -67,7 +67,6 @@ jobs:
         key: ccache-${{ runner.os }}-${{ github.run_id }}
         restore-keys: |
           ccache-${{ runner.os }}-
-        save-always: true
 
     - name: Patch
       continue-on-error: true
