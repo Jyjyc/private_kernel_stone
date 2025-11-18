@@ -50,15 +50,16 @@ jobs:
     - name: Configure ccache
       continue-on-error: true
       run: |
-        export CCACHE_DIR="~/.ccache"
+        export CCACHE_DIR="$HOME/.ccache"
         mkdir -p $CCACHE_DIR
+        touch $CCACHE_DIR/ccache.conf
         echo "CCACHE_DIR=$CCACHE_DIR" >> $GITHUB_ENV
         export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
         echo "PATH=$PATH" >> $GITHUB_ENV
-        echo "max_size = 8G" >> ~/.ccache/ccache.conf
-        echo "compression = true" >> ~/.ccache/ccache.conf
-        echo "hash_dir = false" >> ~/.ccache/ccache.conf
-        echo "sloppiness = file_stat_matches,include_file_mtime,include_file_ctime,time_macros" >> ~/.ccache/ccache.conf
+        echo "max_size = 8G" >> $CCACHE_DIR/ccache.conf
+        echo "compression = true" >> $CCACHE_DIR/ccache.conf
+        echo "hash_dir = false" >> $CCACHE_DIR/ccache.conf
+        echo "sloppiness = file_stat_matches,include_file_mtime,include_file_ctime,time_macros" >> $CCACHE_DIR/ccache.conf
 
     - name: Cache compilation
       continue-on-error: true
