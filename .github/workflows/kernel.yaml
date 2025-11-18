@@ -111,7 +111,7 @@ jobs:
         echo "CXX=ccache clang++" >> $GITHUB_ENV
         echo "AR=llvm-ar" >> $GITHUB_ENV
         echo "NM=llvm-nm" >> $GITHUB_ENV
-        echo "LD=ld.lld" >> $GITHUB_ENV
+        #echo "LD=ld.lld" >> $GITHUB_ENV
         echo "STRIP=llvm-strip" >> $GITHUB_ENV
         echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
@@ -123,14 +123,14 @@ jobs:
         #echo "CXXFLAGS=\"-O3 --lto=thin\"" >> $GITHUB_ENV
         echo "CXXFLAGS=\"-O3\"" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin -fuse-ld=lld\"" >> $GITHUB_ENV
-        echo "LDFLAGS=\"-fuse-ld=lld\"" >> $GITHUB_ENV
+        #echo "LDFLAGS=\"-fuse-ld=lld\"" >> $GITHUB_ENV
         #echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
-        echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
-        echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
+        #echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
+        #echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
 
     - name: Defconfig
       run: |
