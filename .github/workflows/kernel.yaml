@@ -124,7 +124,7 @@ jobs:
         #echo "CFLAGS=\"-O3\"" >> $GITHUB_ENV
         echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
         #echo "CXXFLAGS=\"-O3\"" >> $GITHUB_ENV
-        echo "LDFLAGS=\"--lto=thin -fuse-ld=lld\"" >> $GITHUB_ENV
+        echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"-fuse-ld=lld\"" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
         echo "LTO=thin" >> $GITHUB_ENV
