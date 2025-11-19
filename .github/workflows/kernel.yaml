@@ -64,12 +64,13 @@ jobs:
     - name: Cache compilation
       continue-on-error: true
       if: always()
-      uses: actions/cache@v4.3.0
+      uses: actions/cache@v4
       with:
-        path: ~/.ccache
+        path: $CCACHE_DIR/.ccache
         key: ccache-${{ runner.os }}-${{ github.run_id }}
         restore-keys: |
           ccache-${{ runner.os }}-
+        save-always: true
 
     - name: Patch
       continue-on-error: true
@@ -112,7 +113,7 @@ jobs:
         echo "CXX=ccache clang++" >> $GITHUB_ENV
         echo "AR=llvm-ar" >> $GITHUB_ENV
         echo "NM=llvm-nm" >> $GITHUB_ENV
-        #echo "LD=ld.lld" >> $GITHUB_ENV
+        echo "LD=ld.lld" >> $GITHUB_ENV
         echo "STRIP=llvm-strip" >> $GITHUB_ENV
         echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
