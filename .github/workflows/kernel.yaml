@@ -30,6 +30,7 @@ jobs:
         submodules: recursive
 
     - name: Install deps
+      if: false
       run: |
         sudo apt update
         sudo apt remove -y firefox
@@ -62,7 +63,7 @@ jobs:
 
     - name: Cache compilation
       continue-on-error: true
-      if: always()
+      if: false
       uses: actions/cache@v4
       with:
         path: $CCACHE_DIR
@@ -140,7 +141,7 @@ jobs:
       run: |
         make -j$(nproc) O=out stone_defconfig
         echo "Dump env:"
-        cat $GITHUB_ENV
+        echo "$GITHUB_ENV"
 
     - name: Apply local config tweaks (optional)
       run: |
@@ -152,6 +153,7 @@ jobs:
         make -j$(nproc) O=out olddefconfig
   
     - name: Collect .rej files
+      if: false
 #      if: always()
       continue-on-error: true
       run: |
@@ -159,6 +161,7 @@ jobs:
         find . -name "*.rej" | zip -@ rejects/rejects.zip
 
     - name: Upload patch rejects
+      if: false
 #      if: always()
       continue-on-error: true
       uses: actions/upload-artifact@v4
@@ -167,10 +170,12 @@ jobs:
         path: rejects/
 
     - name: Build kernel
+      if: false
       run: |
         make -j$(nproc) O=out
 
     - name: Archive build artifacts
+      if: false
       uses: actions/upload-artifact@v4
       with:
         name: kernel-out
