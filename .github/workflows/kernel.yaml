@@ -33,7 +33,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt remove -y firefox
-        sudo apt-mark hold linux-*
+        sudo apt-mark hold linux-* > /dev/null 2>&1
         sudo apt upgrade -y
         sudo apt install -y bc bison flex libssl-dev build-essential \
         ccache libncurses5-dev libncursesw5-dev python3 zstd repo git \
