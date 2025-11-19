@@ -48,7 +48,6 @@ jobs:
         --fix-missing
 
     - name: Configure ccache
-      continue-on-error: true
       run: |
         export CCACHE_DIR="$HOME/.ccache"
         mkdir -p $CCACHE_DIR
@@ -66,17 +65,19 @@ jobs:
       if: always()
       uses: actions/cache@v4
       with:
-        path: $CCACHE_DIR/.ccache
+        path: $CCACHE_DIR
         key: ccache-${{ runner.os }}-${{ github.run_id }}
         restore-keys: |
           ccache-${{ runner.os }}-
         save-always: true
+        enableCrossOsArchive: true
 
     - name: Patch
       continue-on-error: true
       run: |
         KERNEL_ROOT=$(pwd)
         echo "KERNEL_ROOT: $KERNEL_ROOT"
+        echo "CPUs: $(nproc)"
         echo "Setup SukiSU"
         curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
         echo "Get susfs"
@@ -100,7 +101,7 @@ jobs:
         cat ./patch/*.patch > $KERNEL_ROOT/custom.patch
         patch -p1 -F5 < $KERNEL_ROOT/custom.patch
         cd $KERNEL_ROOT/KernelSU
-        echo "Apply TWA_RESUME patch"
+        #echo "Apply TWA_RESUME patch"
         #patch -p1 -F5 < twa_resume.patch
 
     - name: Configure env
@@ -138,6 +139,8 @@ jobs:
     - name: Defconfig
       run: |
         make -j$(nproc) O=out stone_defconfig
+        echo "Dump env:"
+        cat $GITHUB_ENV
 
     - name: Apply local config tweaks (optional)
       run: |
