@@ -34,7 +34,7 @@ jobs:
         sudo apt update
         sudo apt remove -y firefox
         sudo apt-mark hold linux-* > /dev/null 2>&1
-        #sudo apt upgrade -y
+        sudo apt upgrade -y
         sudo apt install -y bc bison flex libssl-dev build-essential \
         ccache libncurses5-dev libncursesw5-dev python3 zstd repo git \
         git-lfs device-tree-compiler lz4 xz-utils fontconfig lib32z1-dev \
@@ -138,8 +138,6 @@ jobs:
     - name: Defconfig
       run: |
         make -j$(nproc) O=out stone_defconfig
-        echo "cat"
-        cat $GITHUB_ENV
 
     - name: Apply local config tweaks (optional)
       run: |
