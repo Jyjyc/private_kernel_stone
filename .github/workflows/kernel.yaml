@@ -156,6 +156,7 @@ jobs:
           --enable CONFIG_KRETPROBES
         #./scripts/config --file out/.config \
           #--enable CONFIG_SUSFS4KSU 
+        sort -u out/.config --output=out/.config
         make -j$(nproc) O=out olddefconfig
   
     - name: Collect .rej files
