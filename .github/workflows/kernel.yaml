@@ -125,14 +125,14 @@ jobs:
         echo "READELF=llvm-readelf" >> $GITHUB_ENV
         echo "HOSTCC=ccache clang" >> $GITHUB_ENV
         echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
-        #echo "CFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
-        echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
-        #echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
-        echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
+        echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
+        #echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
+        echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
+        #echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
-        #echo "LTO=thin" >> $GITHUB_ENV
+        echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
