@@ -94,8 +94,8 @@ jobs:
         #cp -v ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
         #cat ./KernelSU/10_enable_susfs_for_ksu/10_enable_susfs_for_ksu_00*.patch > $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
         #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch
-        cp -v ./KernelSU/cp -v ./KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
-        cp -v ./KernelSU/cp -v ./50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
+        cp -v ./KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
+        cp -v ./50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
         cp -v ./fs/* $KERNEL_ROOT/fs/
         cp -v ./include/linux/* $KERNEL_ROOT/include/linux/
         echo "Apply susfs patches"
