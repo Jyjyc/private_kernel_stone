@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Maximize Build Space
-      if: false
+      #if: false
       uses: AdityaGarg8/remove-unwanted-software@v5
       with:
         remove-dotnet: 'true'          # Frees ~2 GB
@@ -68,7 +68,7 @@ jobs:
       continue-on-error: true
       uses: actions/cache@v4
       with:
-        path: $CCACHE_DIR
+        path: $HOME/.ccache
         key: ccache-${{ runner.os }}-${{ github.run_id }}
         restore-keys: |
           ccache-${{ runner.os }}-
@@ -76,7 +76,7 @@ jobs:
         enableCrossOsArchive: true
 
     - name: Patch
-      continue-on-error: true
+      #continue-on-error: true
       run: |
         KERNEL_ROOT=$(pwd)
         echo "KERNEL_ROOT: $KERNEL_ROOT"
@@ -91,21 +91,22 @@ jobs:
         #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/refs/heads/kernel-5.4-jyc-test-1/kernel_patches/KernelSU/twa_resume.patch"
         #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/8135e9b93719606732977e56817dc6006be44f7e/kernel_patches/KernelSU/twa_resume.patch"
         echo "Copy patches"
-        #cp ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
+        #cp -v ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
         #cat ./KernelSU/10_enable_susfs_for_ksu/10_enable_susfs_for_ksu_00*.patch > $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
-        #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch 
-        cp ./fs/* $KERNEL_ROOT/fs/
-        cp ./include/linux/* $KERNEL_ROOT/include/linux/
+        #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch
+        cp -v ./KernelSU/50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
+        cp -v ./fs/* $KERNEL_ROOT/fs/
+        cp -v ./include/linux/* $KERNEL_ROOT/include/linux/
         echo "Apply susfs patches"
-        patch -p1 -F5 < 10_enable_susfs_for_ksu.patch
+        patch -p1 < 10_enable_susfs_for_ksu.patch
         cd $KERNEL_ROOT
-        patch -p1 -F5 < 50_add_susfs_in_kernel.patch
+        patch -p1 < 50_add_susfs_in_kernel.patch
         #echo "Apply custom patches"
         #cat ./patch/*.patch > custom.patch
-        #patch -p1 -F5 < custom.patch
+        #patch -p1 < custom.patch
         #cd $KERNEL_ROOT/KernelSU
         #echo "Apply TWA_RESUME patch"
-        #patch -p1 -F5 < twa_resume.patch
+        #patch -p1 < twa_resume.patch
 
     - name: Configure env
       run: |
