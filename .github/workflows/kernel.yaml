@@ -96,10 +96,10 @@ jobs:
         #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch 
         cp ./fs/* $KERNEL_ROOT/fs/
         cp ./include/linux/* $KERNEL_ROOT/include/linux/
-        #echo "Apply susfs patches"
-        #patch -p1 -F5 < 10_enable_susfs_for_ksu.patch
-        #cd $KERNEL_ROOT
-        #patch -p1 -F5 < 50_add_susfs_in_kernel.patch
+        echo "Apply susfs patches"
+        patch -p1 -F5 < 10_enable_susfs_for_ksu.patch
+        cd $KERNEL_ROOT
+        patch -p1 -F5 < 50_add_susfs_in_kernel.patch
         #echo "Apply custom patches"
         #cat ./patch/*.patch > custom.patch
         #patch -p1 -F5 < custom.patch
