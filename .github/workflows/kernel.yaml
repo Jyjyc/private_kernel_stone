@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Maximize Build Space
-      if: false
+      #if: false
       uses: AdityaGarg8/remove-unwanted-software@v5
       with:
         remove-dotnet: 'true'          # Frees ~2 GB
@@ -62,7 +62,6 @@ jobs:
 
     - name: Cache compilation
       continue-on-error: true
-      if: false
       uses: actions/cache@v4
       with:
         path: $CCACHE_DIR
@@ -152,16 +151,14 @@ jobs:
         make -j$(nproc) O=out olddefconfig
   
     - name: Collect .rej files
-      if: false
-#      if: always()
+      if: always()
       continue-on-error: true
       run: |
         mkdir -p rejects
         find . -name "*.rej" | zip -@ rejects/rejects.zip
 
     - name: Upload patch rejects
-      if: false
-#      if: always()
+      if: always()
       continue-on-error: true
       uses: actions/upload-artifact@v4
       with:
@@ -169,12 +166,10 @@ jobs:
         path: rejects/
 
     - name: Build kernel
-      if: false
       run: |
         make -j$(nproc) O=out
 
     - name: Archive build artifacts
-      if: false
       uses: actions/upload-artifact@v4
       with:
         name: kernel-out
