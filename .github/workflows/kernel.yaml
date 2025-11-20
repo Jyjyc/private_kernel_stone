@@ -139,14 +139,6 @@ jobs:
     - name: Defconfig
       run: |
         make -j$(nproc) O=out stone_defconfig
-        echo "Dump env:"
-        echo "$GITHUB_ENV"
-        echo "file"
-        file $GITHUB_ENV
-        echo "stat"
-        stat $GITHUB_ENV
-        echo "ls"
-        ls -l $GITHUB_ENV/..
         echo "cat"
         cat $GITHUB_ENV
 
