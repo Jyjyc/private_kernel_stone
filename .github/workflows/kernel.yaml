@@ -31,10 +31,13 @@ jobs:
 
     - name: Install deps
       run: |
-        sudo apt update
-        sudo apt remove -y firefox
+        sudo apt update > /dev/null 2>&1
+        sudo apt remove -y firefox > /dev/null 2>&1
+        echo "Apt update and Firefox uninstall completed"
         sudo apt-mark hold linux-* > /dev/null 2>&1
-        sudo apt upgrade -y
+        echo "Apt hold successful"
+        sudo apt upgrade -y > /dev/null 2>&1
+        echo "Upgrade completed"
         sudo apt install -y bc bison flex libssl-dev build-essential \
         ccache libncurses5-dev libncursesw5-dev python3 zstd repo git \
         git-lfs device-tree-compiler lz4 xz-utils fontconfig lib32z1-dev \
@@ -45,7 +48,8 @@ jobs:
         openssl libelf-dev pahole libarchive-tools rsync ssh git-core \
         x11proto-core-dev unzip \
         lld clang-tools llvm-dev \
-        --fix-missing
+        --fix-missing > /dev/null 2>&1
+        echo "Apt packages install completed"
 
     - name: Configure ccache
       run: |
@@ -77,12 +81,13 @@ jobs:
         KERNEL_ROOT=$(pwd)
         echo "KERNEL_ROOT: $KERNEL_ROOT"
         echo "Setup SukiSU"
-        curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
+        curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s non-gki
         echo "Get susfs"
         #git clone --branch kernel-5.4-jyc-test-1 --single-branch https://github.com/Jyjyc/susfs4ksu.git susfs
-        git clone --branch gki-android12-5.10 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
+        #git clone --branch gki-android12-5.10 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
+        git clone --branch kernel-5.4 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
         cd susfs/kernel_patches
-        echo "Get TWA_RESUME patch"
+        #echo "Get TWA_RESUME patch"
         #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/refs/heads/kernel-5.4-jyc-test-1/kernel_patches/KernelSU/twa_resume.patch"
         #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/8135e9b93719606732977e56817dc6006be44f7e/kernel_patches/KernelSU/twa_resume.patch"
         echo "Copy patches"
@@ -124,7 +129,7 @@ jobs:
         #echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
         echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
-        echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
+        #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
         #echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
@@ -144,6 +149,7 @@ jobs:
           --enable CONFIG_KALLSYMS_ALL \
           --enable CONFIG_KPROBES \
           --enable CONFIG_KRETPROBES
+        #./scripts/config --file out/.config \
           #--enable CONFIG_SUSFS4KSU 
         make -j$(nproc) O=out olddefconfig
   
