@@ -120,6 +120,8 @@ jobs:
         #echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
         #echo "CXX=ccache clang++" >> $GITHUB_ENV
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
         #echo "AR=llvm-ar" >> $GITHUB_ENV
         #echo "NM=llvm-nm" >> $GITHUB_ENV
         #echo "LD=ld.lld" >> $GITHUB_ENV
@@ -129,10 +131,12 @@ jobs:
         #echo "READELF=llvm-readelf" >> $GITHUB_ENV
         #echo "HOSTCC=ccache clang" >> $GITHUB_ENV
         #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
+        echo "HOSTCC=clang" >> $GITHUB_ENV
+        echo "HOSTCXX=clang++" >> $GITHUB_ENV
         #echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
-        echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
+        #echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
-        echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
+        #echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
@@ -142,9 +146,11 @@ jobs:
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
         #echo "WITH_POLLY=on" >> $GITHUB_ENV
         #echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_LLD=on" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_LLD=off" >> $GITHUB_ENV
         #echo "LLVM_HOST_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
         #echo "LLVM_DEFAULT_TARGET_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
         #echo "LLVM_TARGETS_TO_BUILD=aarch64" >> $GITHUB_ENV
