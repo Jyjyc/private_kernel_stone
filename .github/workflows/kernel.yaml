@@ -116,8 +116,8 @@ jobs:
       run: |
         echo "ARCH=arm64" >> $GITHUB_ENV
         echo "SUBARCH=arm64" >> $GITHUB_ENV
-        echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
-        echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
+        #echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
+        #echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
         #echo "CXX=ccache clang++" >> $GITHUB_ENV
         #echo "AR=llvm-ar" >> $GITHUB_ENV
@@ -145,9 +145,9 @@ jobs:
         #echo "WITH_POLLY=on" >> $GITHUB_ENV
         #echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_LLD=on" >> $GITHUB_ENV
-        echo "LLVM_HOST_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
-        echo "LLVM_DEFAULT_TARGET_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
-        echo "LLVM_TARGETS_TO_BUILD=aarch64" >> $GITHUB_ENV
+        #echo "LLVM_HOST_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
+        #echo "LLVM_DEFAULT_TARGET_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
+        #echo "LLVM_TARGETS_TO_BUILD=aarch64" >> $GITHUB_ENV
 
     - name: Defconfig
       run: |
