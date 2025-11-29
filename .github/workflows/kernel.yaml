@@ -119,7 +119,7 @@ jobs:
         #clang
         echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
         #gcc
-        echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
+        #echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
         #echo "CXX=ccache clang++" >> $GITHUB_ENV
