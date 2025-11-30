@@ -118,14 +118,14 @@ jobs:
         echo "ARCH=arm64" >> $GITHUB_ENV
         echo "SUBARCH=arm64" >> $GITHUB_ENV
         #clang
-        #echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
+        echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
         #gcc
-        echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
+        #echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
         #echo "CXX=ccache clang++" >> $GITHUB_ENV
-        #echo "CC=clang" >> $GITHUB_ENV
-        #echo "CXX=clang++" >> $GITHUB_ENV
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
         #echo "AR=llvm-ar" >> $GITHUB_ENV
         #echo "NM=llvm-nm" >> $GITHUB_ENV
         #echo "LD=ld.lld" >> $GITHUB_ENV
@@ -135,8 +135,8 @@ jobs:
         #echo "READELF=llvm-readelf" >> $GITHUB_ENV
         #echo "HOSTCC=ccache clang" >> $GITHUB_ENV
         #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
-        #echo "HOSTCC=clang" >> $GITHUB_ENV
-        #echo "HOSTCXX=clang++" >> $GITHUB_ENV
+        echo "HOSTCC=clang" >> $GITHUB_ENV
+        echo "HOSTCXX=clang++" >> $GITHUB_ENV
         #echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
         #echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
@@ -170,8 +170,8 @@ jobs:
           --enable CONFIG_KALLSYMS_ALL \
           --enable CONFIG_KPROBES \
           --enable CONFIG_KRETPROBES
-        ./scripts/config --file out/.config \
-          --enable CONFIG_SUSFS4KSU 
+        #./scripts/config --file out/.config \
+          #--enable CONFIG_SUSFS4KSU 
         sort -u out/.config --output=out/.config
         make -j$(nproc) O=out olddefconfig
   
