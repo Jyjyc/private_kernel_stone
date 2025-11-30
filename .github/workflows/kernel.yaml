@@ -129,7 +129,7 @@ jobs:
         #echo "AR=llvm-ar" >> $GITHUB_ENV
         #echo "NM=llvm-nm" >> $GITHUB_ENV
         #echo "LD=ld.lld" >> $GITHUB_ENV
-        echo "LD=ld.gold" >> $GITHUB_ENV
+        echo "LD=ld.mold" >> $GITHUB_ENV
         #echo "STRIP=llvm-strip" >> $GITHUB_ENV
         #echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         #echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
