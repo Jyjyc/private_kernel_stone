@@ -49,7 +49,7 @@ jobs:
         x11proto-core-dev unzip \
         --fix-missing > /dev/null 2>&1
         sudo apt install -y lld clang-tools llvm-dev --fix-missing > /dev/null 2>&1
-        sudo apt install -y gcc-aarch64-linux-gnu binutils-gold --fix-missing
+        sudo apt install -y gcc-aarch64-linux-gnu binutils-gold mold --fix-missing
         echo "Apt packages install completed"
 
     - name: Configure ccache
@@ -129,6 +129,7 @@ jobs:
         #echo "AR=llvm-ar" >> $GITHUB_ENV
         #echo "NM=llvm-nm" >> $GITHUB_ENV
         #echo "LD=ld.lld" >> $GITHUB_ENV
+        echo "LD=ld.gold" >> $GITHUB_ENV
         #echo "STRIP=llvm-strip" >> $GITHUB_ENV
         #echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         #echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
@@ -144,7 +145,7 @@ jobs:
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
-        echo "LDFLAGS=-fuse-ld=gold" >> $GITHUB_ENV
+        #echo "LDFLAGS=-fuse-ld=gold" >> $GITHUB_ENV
         #echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
