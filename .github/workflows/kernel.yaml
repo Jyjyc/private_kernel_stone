@@ -145,12 +145,12 @@ jobs:
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
         #echo "LTO=thin" >> $GITHUB_ENV
-        #echo "LLVM=1" >> $GITHUB_ENV
-        #echo "LLVM_IAS=1" >> $GITHUB_ENV
+        echo "LLVM=1" >> $GITHUB_ENV
+        echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
-        #echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
         #echo "WITH_POLLY=on" >> $GITHUB_ENV
         echo "WITH_POLLY=off" >> $GITHUB_ENV
         #echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
