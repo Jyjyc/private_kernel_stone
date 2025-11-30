@@ -49,6 +49,7 @@ jobs:
         x11proto-core-dev unzip \
         --fix-missing > /dev/null 2>&1
         sudo apt install -y lld clang-tools llvm-dev --fix-missing > /dev/null 2>&1
+        sudo apt install -y gcc-aarch64-linux-gnu --fix-missing
         echo "Apt packages install completed"
 
     - name: Configure ccache
