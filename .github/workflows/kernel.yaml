@@ -118,22 +118,22 @@ jobs:
         echo "ARCH=arm64" >> $GITHUB_ENV
         echo "SUBARCH=arm64" >> $GITHUB_ENV
         #clang triplet
-        #echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
+        echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
         #gcc triplet
-        echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
+        #echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
         #echo "CXX=ccache clang++" >> $GITHUB_ENV
         echo "CC=clang" >> $GITHUB_ENV
         echo "CXX=clang++" >> $GITHUB_ENV
-        #echo "AR=llvm-ar" >> $GITHUB_ENV
-        #echo "NM=llvm-nm" >> $GITHUB_ENV
-        #echo "LD=ld.lld" >> $GITHUB_ENV
-        echo "LD=ld.mold" >> $GITHUB_ENV
-        #echo "STRIP=llvm-strip" >> $GITHUB_ENV
-        #echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
-        #echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
-        #echo "READELF=llvm-readelf" >> $GITHUB_ENV
+        echo "AR=llvm-ar" >> $GITHUB_ENV
+        echo "NM=llvm-nm" >> $GITHUB_ENV
+        echo "LD=ld.lld" >> $GITHUB_ENV
+        #echo "LD=ld.mold" >> $GITHUB_ENV
+        echo "STRIP=llvm-strip" >> $GITHUB_ENV
+        echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
+        echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
+        echo "READELF=llvm-readelf" >> $GITHUB_ENV
         #echo "HOSTCC=ccache clang" >> $GITHUB_ENV
         #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
         echo "HOSTCC=clang" >> $GITHUB_ENV
@@ -146,18 +146,18 @@ jobs:
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=gold" >> $GITHUB_ENV
-        #echo "LTO=thin" >> $GITHUB_ENV
+        echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
-        #echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
-        echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
-        #echo "WITH_POLLY=on" >> $GITHUB_ENV
-        echo "WITH_POLLY=off" >> $GITHUB_ENV
-        #echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
-        #echo "LLVM_ENABLE_LLD=on" >> $GITHUB_ENV
-        echo "LLVM_ENABLE_LLD=off" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
+        #echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
+        echo "WITH_POLLY=on" >> $GITHUB_ENV
+        #echo "WITH_POLLY=off" >> $GITHUB_ENV
+        echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_LLD=on" >> $GITHUB_ENV
+        #echo "LLVM_ENABLE_LLD=off" >> $GITHUB_ENV
         echo "LLVM_HOST_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
         echo "LLVM_DEFAULT_TARGET_TRIPLE=aarch64-linux-gnu" >> $GITHUB_ENV
         echo "LLVM_TARGETS_TO_BUILD=aarch64" >> $GITHUB_ENV
@@ -172,8 +172,8 @@ jobs:
           --enable CONFIG_KALLSYMS_ALL \
           --enable CONFIG_KPROBES \
           --enable CONFIG_KRETPROBES
-        ./scripts/config --file out/.config \
-          --enable CONFIG_SUSFS4KSU 
+        #./scripts/config --file out/.config \
+          #--enable CONFIG_SUSFS4KSU 
         sort -u out/.config --output=out/.config
         make -j$(nproc) O=out olddefconfig
   
