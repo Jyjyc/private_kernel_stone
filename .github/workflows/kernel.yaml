@@ -101,7 +101,7 @@ jobs:
         #cp -v ./50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
         cp -v ./fs/* $KERNEL_ROOT/fs/
         cp -v ./include/linux/* $KERNEL_ROOT/include/linux/
-        echo "Apply susfs patches"
+        #echo "Apply susfs patches"
         #cd $KERNEL_ROOT/KernelSU
         #patch -p1 < 10_enable_susfs_for_ksu.patch
         #cd $KERNEL_ROOT
@@ -117,9 +117,9 @@ jobs:
       run: |
         echo "ARCH=arm64" >> $GITHUB_ENV
         echo "SUBARCH=arm64" >> $GITHUB_ENV
-        #clang
+        #clang triplet
         #echo "CROSS_COMPILE=aarch64-none-linux-gnu-" >> $GITHUB_ENV
-        #gcc
+        #gcc triplet
         echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
         #echo "CC=ccache clang" >> $GITHUB_ENV
