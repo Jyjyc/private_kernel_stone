@@ -84,7 +84,7 @@ jobs:
         KERNEL_ROOT=$(pwd)
         echo "KERNEL_ROOT: $KERNEL_ROOT"
         echo "Setup SukiSU"
-        curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s susfs-main
+        curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
         echo "Get susfs"
         #git clone --branch kernel-5.4-jyc-test-1 --single-branch https://github.com/Jyjyc/susfs4ksu.git susfs
         git clone --branch gki-android12-5.10 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
@@ -97,15 +97,15 @@ jobs:
         #cp -v ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
         #cat ./KernelSU/10_enable_susfs_for_ksu/10_enable_susfs_for_ksu_00*.patch > $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
         #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch
-        #cp -v ./KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
-        #cp -v ./50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
+        cp -v ./KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
+        cp -v ./50_add_susfs_in_gki-android12-5.10.patch $KERNEL_ROOT/50_add_susfs_in_kernel.patch
         cp -v ./fs/* $KERNEL_ROOT/fs/
         cp -v ./include/linux/* $KERNEL_ROOT/include/linux/
-        #echo "Apply susfs patches"
-        #cd $KERNEL_ROOT/KernelSU
-        #patch -p1 < 10_enable_susfs_for_ksu.patch
-        #cd $KERNEL_ROOT
-        #patch -p1 < 50_add_susfs_in_kernel.patch
+        echo "Apply susfs patches"
+        cd $KERNEL_ROOT/KernelSU
+        patch -p1 < 10_enable_susfs_for_ksu.patch
+        cd $KERNEL_ROOT
+        patch -p1 < 50_add_susfs_in_kernel.patch
         #echo "Apply custom patches"
         #cat ./patch/*.patch > custom.patch
         #patch -p1 < custom.patch
@@ -138,13 +138,13 @@ jobs:
         #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
         echo "HOSTCC=clang" >> $GITHUB_ENV
         echo "HOSTCXX=clang++" >> $GITHUB_ENV
-        #echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
+        echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
         #echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
-        #echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
+        echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
         #echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
-        #echo "LDFLAGS=\"--lto=thin\"" >> $GITHUB_ENV
+        echo "LDFLAGS=\"-flto=thin\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=gold" >> $GITHUB_ENV
         echo "LTO=thin" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
