@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Maximize Build Space
-      #if: false
+      if: false
       uses: AdityaGarg8/remove-unwanted-software@v5
       with:
         remove-dotnet: 'true'          # Frees ~2 GB
@@ -47,13 +47,15 @@ jobs:
         python3-markdown libxml2-utils xsltproc libc6-dev libtinfo6 cpio kmod \
         openssl libelf-dev pahole libarchive-tools rsync ssh git-core \
         x11proto-core-dev unzip \
-        --fix-missing > /dev/null 2>&1
-        sudo apt install -y lld clang-tools llvm-dev --fix-missing > /dev/null 2>&1
-        #sudo apt install -y gcc-aarch64-linux-gnu binutils-gold mold --fix-missing
+        --fix-missing
+        sudo apt install -y lld clang-tools llvm-dev --fix-missing
+        #sudo apt install -y binutils-gold --fix-missing
+        sudo apt install -y mold --fix-missing
+        #sudo apt install -y gcc-aarch64-linux-gnu --fix-missing
         echo "Apt packages install completed"
 
     - name: Configure ccache
-      #if: false
+      if: false
       run: |
         export CCACHE_DIR="$HOME/.ccache"
         mkdir -p $CCACHE_DIR
@@ -67,7 +69,7 @@ jobs:
         echo "sloppiness = file_stat_matches,include_file_mtime,include_file_ctime,time_macros" >> $CCACHE_DIR/ccache.conf
 
     - name: Cache compilation
-      #if: false
+      if: false
       continue-on-error: true
       uses: actions/cache@v4
       with:
@@ -87,7 +89,7 @@ jobs:
         curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh" | bash -s nongki
         #echo "Setup RKSU"
         #curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s susfs-rksu-master
-        #echo "Get susfs"
+        echo "Get susfs"
         #git clone --branch kernel-5.4-jyc-test-1 --single-branch https://github.com/Jyjyc/susfs4ksu.git susfs
         git clone --branch gki-android12-5.10 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
         #git clone --branch kernel-5.4 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
@@ -125,10 +127,11 @@ jobs:
         #gcc triplet
         #echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
-        echo "CC=ccache clang" >> $GITHUB_ENV
-        echo "CXX=ccache clang++" >> $GITHUB_ENV
-        #echo "CC=clang" >> $GITHUB_ENV
-        #echo "CXX=clang++" >> $GITHUB_ENV
+        #echo "CC=ccache clang" >> $GITHUB_ENV
+        #echo "CXX=ccache clang++" >> $GITHUB_ENV
+        echo "CC=clang" >> $GITHUB_ENV
+        echo "CXX=clang++" >> $GITHUB_ENV
+        echo "CPP=clang-cpp" >> $GITHUB_ENV
         echo "AR=llvm-ar" >> $GITHUB_ENV
         echo "NM=llvm-nm" >> $GITHUB_ENV
         echo "LD=ld.lld" >> $GITHUB_ENV
@@ -136,28 +139,31 @@ jobs:
         echo "STRIP=llvm-strip" >> $GITHUB_ENV
         echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
+        echo "RANLIB=llvm-ranlib" >> $GITHUB_ENV
         echo "READELF=llvm-readelf" >> $GITHUB_ENV
-        echo "HOSTCC=ccache clang" >> $GITHUB_ENV
-        echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
-        #echo "HOSTCC=clang" >> $GITHUB_ENV
-        #echo "HOSTCXX=clang++" >> $GITHUB_ENV
-        echo "CFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
-        #echo "CFLAGS=\"-O3\"" >> $GITHUB_ENV
-        echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
-        #echo "CXXFLAGS=\"-O3\"" >> $GITHUB_ENV
+        #echo "HOSTCC=ccache clang" >> $GITHUB_ENV
+        #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
+        echo "HOSTCC=clang" >> $GITHUB_ENV
+        echo "HOSTCXX=clang++" >> $GITHUB_ENV
+        #echo "CFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
+        echo "CFLAGS=\"-O3\"" >> $GITHUB_ENV
+        #echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
+        echo "CXXFLAGS=\"-O3\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
-        echo "LDFLAGS=\"-flto=thin\"" >> $GITHUB_ENV
+        #echo "LDFLAGS=\"-flto=thin\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=gold" >> $GITHUB_ENV
-        echo "LTO=thin" >> $GITHUB_ENV
+        #echo "LTO=thin" >> $GITHUB_ENV
+        #echo "LTO=off" >> $GITHUB_ENV
         echo "LLVM=1" >> $GITHUB_ENV
         echo "LLVM_IAS=1" >> $GITHUB_ENV
         echo "KBUILD_BUILD_USER=github" >> $GITHUB_ENV
         echo "KBUILD_BUILD_HOST=actions" >> $GITHUB_ENV
-        echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
+        #echo "LLVM_ENABLE_PROJECTS=clang;polly;lld" >> $GITHUB_ENV
+        echo "LLVM_ENABLE_PROJECTS=clang;lld" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_PROJECTS=clang" >> $GITHUB_ENV
-        echo "WITH_POLLY=on" >> $GITHUB_ENV
-        #echo "WITH_POLLY=off" >> $GITHUB_ENV
+        #echo "WITH_POLLY=on" >> $GITHUB_ENV
+        echo "WITH_POLLY=off" >> $GITHUB_ENV
         echo "LLVM_USE_LINKER=lld" >> $GITHUB_ENV
         echo "LLVM_ENABLE_LLD=on" >> $GITHUB_ENV
         #echo "LLVM_ENABLE_LLD=off" >> $GITHUB_ENV
@@ -174,10 +180,10 @@ jobs:
         ./scripts/config --file out/.config \
           --enable CONFIG_KPROBES \
           --enable CONFIG_KRETPROBES
-        ./scripts/config --file out/.config \
-          --enable CONFIG_KALLSYMS_ALL
+        #./scripts/config --file out/.config \
+          #--enable CONFIG_KALLSYMS_ALL
           #--enable CONFIG_SUSFS4KSU
-        sort -u out/.config --output=out/.config
+        #sort -u out/.config --output=out/.config
         make -j$(nproc) O=out olddefconfig
   
     - name: Collect .rej files
@@ -207,3 +213,4 @@ jobs:
           out/arch/arm64/boot/Image*
           out/arch/arm64/boot/dts/**/*.dtb
           out/arch/arm64/boot/dtbo.img
+          
