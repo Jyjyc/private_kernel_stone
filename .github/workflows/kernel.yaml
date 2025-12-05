@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Maximize Build Space
-      if: false
+      #if: false
       uses: AdityaGarg8/remove-unwanted-software@v5
       with:
         remove-dotnet: 'true'          # Frees ~2 GB
@@ -53,7 +53,7 @@ jobs:
         echo "Apt packages install completed"
 
     - name: Configure ccache
-      if: false
+      #if: false
       run: |
         export CCACHE_DIR="$HOME/.ccache"
         mkdir -p $CCACHE_DIR
@@ -67,7 +67,7 @@ jobs:
         echo "sloppiness = file_stat_matches,include_file_mtime,include_file_ctime,time_macros" >> $CCACHE_DIR/ccache.conf
 
     - name: Cache compilation
-      if: false
+      #if: false
       continue-on-error: true
       uses: actions/cache@v4
       with:
@@ -125,10 +125,10 @@ jobs:
         #gcc triplet
         #echo "CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
         echo "CLANG_TRIPLE=aarch64-linux-gnu-" >> $GITHUB_ENV
-        #echo "CC=ccache clang" >> $GITHUB_ENV
-        #echo "CXX=ccache clang++" >> $GITHUB_ENV
-        echo "CC=clang" >> $GITHUB_ENV
-        echo "CXX=clang++" >> $GITHUB_ENV
+        echo "CC=ccache clang" >> $GITHUB_ENV
+        echo "CXX=ccache clang++" >> $GITHUB_ENV
+        #echo "CC=clang" >> $GITHUB_ENV
+        #echo "CXX=clang++" >> $GITHUB_ENV
         echo "AR=llvm-ar" >> $GITHUB_ENV
         echo "NM=llvm-nm" >> $GITHUB_ENV
         echo "LD=ld.lld" >> $GITHUB_ENV
@@ -137,14 +137,14 @@ jobs:
         echo "OBJCOPY=llvm-objcopy" >> $GITHUB_ENV
         echo "OBJDUMP=llvm-objdump" >> $GITHUB_ENV
         echo "READELF=llvm-readelf" >> $GITHUB_ENV
-        #echo "HOSTCC=ccache clang" >> $GITHUB_ENV
-        #echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
-        echo "HOSTCC=clang" >> $GITHUB_ENV
-        echo "HOSTCXX=clang++" >> $GITHUB_ENV
-        echo "CFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
-        #echo "CFLAGS=\"-Ofast\"" >> $GITHUB_ENV
-        echo "CXXFLAGS=\"-Ofast -flto=thin\"" >> $GITHUB_ENV
-        #echo "CXXFLAGS=\"-Ofast\"" >> $GITHUB_ENV
+        echo "HOSTCC=ccache clang" >> $GITHUB_ENV
+        echo "HOSTCXX=ccache clang++" >> $GITHUB_ENV
+        #echo "HOSTCC=clang" >> $GITHUB_ENV
+        #echo "HOSTCXX=clang++" >> $GITHUB_ENV
+        echo "CFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
+        #echo "CFLAGS=\"-O3\"" >> $GITHUB_ENV
+        echo "CXXFLAGS=\"-O3 -flto=thin\"" >> $GITHUB_ENV
+        #echo "CXXFLAGS=\"-O3\"" >> $GITHUB_ENV
         #echo "LDFLAGS=-flto=thin -fuse-ld=lld" >> $GITHUB_ENV
         #echo "LDFLAGS=-fuse-ld=lld" >> $GITHUB_ENV
         echo "LDFLAGS=\"-flto=thin\"" >> $GITHUB_ENV
@@ -175,8 +175,8 @@ jobs:
           --enable CONFIG_KPROBES \
           --enable CONFIG_KRETPROBES
         ./scripts/config --file out/.config \
-          --enable CONFIG_KALLSYMS_ALL \
-          --enable CONFIG_SUSFS4KSU
+          --enable CONFIG_KALLSYMS_ALL
+          #--enable CONFIG_SUSFS4KSU
         sort -u out/.config --output=out/.config
         make -j$(nproc) O=out olddefconfig
   
