@@ -94,11 +94,11 @@ jobs:
         git clone --branch gki-android12-5.10 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
         #git clone --branch kernel-5.4 --single-branch https://gitlab.com/simonpunk/susfs4ksu.git susfs
         cd susfs/kernel_patches
-        #echo "Get TWA_RESUME patch"
+        echo "Get TWA_RESUME patch"
         #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/refs/heads/kernel-5.4-jyc-test-1/kernel_patches/KernelSU/twa_resume.patch"
-        #curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/8135e9b93719606732977e56817dc6006be44f7e/kernel_patches/KernelSU/twa_resume.patch"
+        curl -LSs -o ./KernelSU/twa_resume.patch "https://raw.githubusercontent.com/Jyjyc/susfs4ksu/8135e9b93719606732977e56817dc6006be44f7e/kernel_patches/KernelSU/twa_resume.patch"
         echo "Copy patches"
-        #cp -v ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
+        cp -v ./KernelSU/twa_resume.patch $KERNEL_ROOT/KernelSU/twa_resume.patch
         #cat ./KernelSU/10_enable_susfs_for_ksu/10_enable_susfs_for_ksu_00*.patch > $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
         #cat ./50_add_susfs_in_kernel-5.4/50_add_susfs_in_kernel-5.4_00*.patch > $KERNEL_ROOT/50_add_susfs_in_kernel.patch
         #cp -v ./KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU/10_enable_susfs_for_ksu.patch
@@ -114,9 +114,9 @@ jobs:
         #echo "Apply custom patches"
         #cat ./patch/*.patch > custom.patch
         #patch -p1 < custom.patch
-        #cd $KERNEL_ROOT/KernelSU
-        #echo "Apply TWA_RESUME patch"
-        #patch -p1 < twa_resume.patch
+        cd $KERNEL_ROOT/KernelSU
+        echo "Apply TWA_RESUME patch"
+        patch -p1 < twa_resume.patch
 
     - name: Configure env
       run: |
